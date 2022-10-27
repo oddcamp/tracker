@@ -32,6 +32,8 @@ function enableAutoEventTracking({
     return false
   }
 
+  debugLog(debug, `Auto event tracking enabled`)
+
   const targetsSelector = targets
     .map((t) => `${t}[data-${attributeName}]`)
     .join(`,`)
@@ -62,6 +64,8 @@ function enableAutoEventTracking({
 
   return () => {
     sourceNode.removeEventListener(`click`, docClick)
+
+    debugLog(debug, `Auto event tracking disabled`)
   }
 }
 
@@ -79,34 +83,32 @@ function trackEvent({ data, trackers = TRACKERS, debug = false }) {
     return
   }
 
-  switch (trackers) {
-    case `plausible`: {
-      if (window && window.plausible) {
-        debugLog(
-          debug,
-          `Plausible event tracking request has been successfully fulfilled`,
-          data
-        )
+  trackers.forEach((tracker) => {
+    switch (tracker) {
+      case `plausible`: {
+        if (window && window.plausible) {
+          debugLog(
+            debug,
+            `Plausible event tracking request has been fulfilled`,
+            data
+          )
 
-        window.plausible(data.name, {
-          props: data.props,
-          callback: () => {
-            debugLog(
-              debug,
-              `Plausible event has been successfully tracked`,
-              data
-            )
-          },
-        })
-      } else {
-        debugLog(
-          debug,
-          `Plausible event tracking requested, but tracker is not available`
-        )
+          window.plausible(data.name, {
+            props: data.props,
+            callback: () => {
+              debugLog(debug, `Plausible event has been tracked`, data)
+            },
+          })
+        } else {
+          debugLog(
+            debug,
+            `Plausible event tracking requested, but tracker is not available`
+          )
+        }
+        break
       }
-      break
     }
-  }
+  })
 }
 
 function anyTrackersAvailable(trackers) {

@@ -1,7 +1,10 @@
 <html>
   <head>
+    <title>Odd Camp tracking helpers library</title>
 
-    <!-- <script defer data-domain="map-staging.naturkartan.se" src="https://plausible.io/js/script.js"></script> -->
+    <if condition="plausible_domain">
+      <script defer data-domain="{{ plausible_domain }}" src="https://plausible.io/js/script.local.js"></script>
+    </if>
   </head>
 
   <body>
