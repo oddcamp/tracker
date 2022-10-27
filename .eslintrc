@@ -1,6 +1,14 @@
 {
   "root": true,
   "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "ecmaVersion": 2016,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "extends": [
     "google",
     "eslint:recommended",
@@ -9,13 +17,6 @@
     "prettier"
   ],
   "plugins": ["flowtype", "prettier", "react", "filenames", "html", "html-erb"],
-  "parserOptions": {
-    "ecmaVersion": 2016,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
   "env": {
     "browser": true,
     "es6": true,

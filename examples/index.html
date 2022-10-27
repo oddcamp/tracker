@@ -1,0 +1,65 @@
+<html>
+  <head>
+
+    <!-- <script defer data-domain="map-staging.naturkartan.se" src="https://plausible.io/js/script.js"></script> -->
+  </head>
+
+  <body>
+    <h1>
+      Odd Camp tracking helpers library
+    </h1>
+
+    <p>Debug mode: enabled</p>
+
+    <h2>
+      Automatic Event Tracking
+    </h2>
+
+    <p>
+      <a
+        href="/"
+        data-track-event='{
+          "name": "Click of an automatic event tracking",
+          "props": {
+            "trigger_type": "anchor"
+          }
+        }'
+      >
+        Track link clicks
+      </a>
+    </p>
+
+    <p>
+      <button
+        type="button"
+        data-track-event='{
+          "name": "Click of an automatic event tracking",
+          "props": {
+            "trigger_type": "button"
+          }
+        }'
+      >
+        Track button clicks
+      </button>
+    </p>
+
+    <p>
+      <button type="button" class="disable-auto-tracking-button">
+        Disable automatic event tracking
+      </button>
+    </p>
+
+    <h2>
+      Manual tracking
+    </h2>
+
+    <input
+      type="text"
+      value=""
+      class="manual-tracking-input"
+      placeholder="Track input typings"
+    />
+
+    <script src="./index.js" type="module" defer></script>
+  </body>
+</html>
