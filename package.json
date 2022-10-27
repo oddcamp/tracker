@@ -1,10 +1,9 @@
 {
   "name": "@oddcamp/tracker",
   "description": "Odd Camp tracking helpers library",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Odd Camp <hello@oddcamp.com>",
   "license": "MIT",
-  "private": false,
   "main": "src/index.js",
   "scripts": {
     "predev": "yarn clear",
