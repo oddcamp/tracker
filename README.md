@@ -1,6 +1,6 @@
 # Odd Camp tracking helpers library
 
-A collection for tracking helper functions for snappier analytics.
+A collection of tracking helper functions for snappier analytics.
 
 ## Supported tracker services
 
@@ -17,7 +17,7 @@ $ yarn add @oddcamp/tracker
 2. Enjoy
 
 ```js
-import { enableAutoEventTracking } from "../src/index.js"
+import { enableAutoEventTracking } from "@oddcamp/tracker"
 
 enableAutoEventTracking()
 ```
