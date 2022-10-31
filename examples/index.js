@@ -1,21 +1,21 @@
-import { enableAutoEventTracking, trackEvent } from "../src/index.js"
+import { enableAutoEventAnalytics, analyticizeEvent } from "../src/index.js"
 
-const disableAutoEventTracking = enableAutoEventTracking({ debug: true })
+const disableAutoEventAnalytics = enableAutoEventAnalytics({ debug: true })
 
 document
-  .querySelector(`.disable-auto-tracking-button`)
+  .querySelector(`.disable-auto-analytics-button`)
   .addEventListener(
     `click`,
-    () => disableAutoEventTracking && disableAutoEventTracking()
+    () => disableAutoEventAnalytics && disableAutoEventAnalytics()
   )
 
 document
-  .querySelector(`.manual-tracking-input`)
+  .querySelector(`.manual-analytics-input`)
   .addEventListener(`keyup`, (e) => {
-    trackEvent({
+    analyticizeEvent({
       debug: true,
       data: {
-        name: `Input value change of a manual event tracking`,
+        name: `Input value change of a manual event analytics`,
         props: { value: e.target.value },
       },
     })

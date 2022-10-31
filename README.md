@@ -1,8 +1,8 @@
-# Odd Camp tracking helpers library
+# Odd Camp analytics helpers library
 
-A collection of tracking helper functions for snappier analytics.
+A collection of analytics helper functions.
 
-## Supported tracker services
+## Supported analytics services
 
 - Plausible
 
@@ -11,21 +11,21 @@ A collection of tracking helper functions for snappier analytics.
 1. Install
 
 ```js
-$ yarn add @oddcamp/tracker
+$ yarn add @oddcamp/analytics
 ```
 
 2. Enjoy
 
 ```js
-import { enableAutoEventTracking } from "@oddcamp/tracker"
+import { enableAutoEventAnalytics } from "@oddcamp/analytics"
 
-enableAutoEventTracking()
+enableAutoEventAnalytics()
 ```
 
 HTML
 
 ```html
-  <a href="/" data-track-event='{"name": "Click", "props": {"trigger": "anchor"}}'>
+  <a href="/" data-event-analytics='{"name": "Click", "props": {"trigger": "anchor"}}'>
     Link
   </a>
 ```
@@ -33,20 +33,20 @@ HTML
 ERB
 
 ```erb
-  <%= link_to 'Link', root_path, data: {track_event: {name: 'Click', props: {trigger: 'anchor'}}} %>
+  <%= link_to 'Link', root_path, data: {event_analytics: {name: 'Click', props: {trigger: 'anchor'}}} %>
 ```
 
 JSX
 
 ```jsx
-  <a href="/" data-track-event={JSON.stringify({name: 'Click', props: {trigger: 'anchor'}})}>
+  <a href="/" data-event-analytics={JSON.stringify({name: 'Click', props: {trigger: 'anchor'}})}>
     Link
   </a>
 ```
 
 ## Development
 
-1. Create `.env` and add tracker variables you prefer to test:
+1. Create `.env` and set variables of analytics services you prefer to test:
     - `PLAUSIBLE_DOMAIN`
 2. `$ yarn install`
 3. `$ yarn dev`
@@ -54,40 +54,40 @@ JSX
 
 ## API
 
-### `enableAutoEventTracking`
+### `enableAutoEventAnalytics`
 
-Enabled automatic event tracking.
+Enabled automatic event analytics.
 
 _Defaults:_
 
 ```js
-enableAutoEventTracking({
-  attributeName = `track-event`,
+enableAutoEventAnalytics({
+  attributeName = `event-analytics`,
   sourceNode = document,
   targets = [`a`, `button`],
-  trackers = [`plausible`],
+  services = [`plausible`],
   debug = false,
 })
 ```
 
-_Returns:_ function which disables automatic event tracking if executed, e.g.:
+_Returns:_ function which disables automatic event analytics if executed, e.g.:
 
 ```js
-const disableAutoEventTracking = enableAutoEventTracking()
+const disableAutoEventAnalytics = enableAutoEventAnalytics()
 // ...
-disableAutoEventTracking()
+disableAutoEventAnalytics()
 ```
 
-### `trackEvent`
+### `analyticizeEvent`
 
-Tracks an event.
+Analyticizes an event.
 
 _Defaults:_
 
 ```js
-trackEvent({ 
+analyticizeEvent({ 
   data, 
-  trackers = [`plausible`],
+  services = [`plausible`],
   debug = false 
 })
 ```
@@ -95,7 +95,7 @@ trackEvent({
 _Example:_
 
 ```js
-trackEvent({
+analyticizeEvent({
   data: {
     name: `Event name`,
     props: { name: `value` },

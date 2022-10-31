@@ -1,7 +1,7 @@
 {
-  "name": "@oddcamp/tracker",
-  "description": "Odd Camp tracking helpers library",
-  "version": "0.0.3",
+  "name": "@oddcamp/analytics",
+  "description": "Odd Camp analytics helpers library",
+  "version": "0.0.4",
   "author": "Odd Camp <hello@oddcamp.com>",
   "license": "MIT",
   "main": "src/index.js",

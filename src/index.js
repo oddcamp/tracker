@@ -1,18 +1,18 @@
 import { isPlainObject } from "lodash"
 
-const TRACKERS = [`plausible`]
+const SERVICES = [`plausible`]
 
-function enableAutoEventTracking({
-  attributeName = `track-event`,
+function enableAutoEventAnalytics({
+  attributeName = `event-analytics`,
   sourceNode = document,
   targets = [`a`, `button`],
-  trackers = TRACKERS,
+  services = SERVICES,
   debug = false,
 }) {
   if (!window || !document) {
     debugLog(
       debug,
-      `Auto event tracking could not be enabled due to absence of DOM`
+      `Auto event analytics could not be enabled due to absence of DOM`
     )
     return false
   }
@@ -22,17 +22,17 @@ function enableAutoEventTracking({
     !(sourceNode === document || sourceNode instanceof Element) ||
     !targets ||
     !targets.length ||
-    !trackers ||
-    !trackers.length
+    !services ||
+    !services.length
   ) {
     debugLog(
       debug,
-      `Auto event tracking could not be enabled due to faulty parameters provided`
+      `Auto event analytics could not be enabled due to faulty parameters provided`
     )
     return false
   }
 
-  debugLog(debug, `Auto event tracking enabled`)
+  debugLog(debug, `Auto event analytics enabled`)
 
   const targetsSelector = targets
     .map((t) => `${t}[data-${attributeName}]`)
@@ -42,10 +42,10 @@ function enableAutoEventTracking({
     const targetNode = e.target.closest(targetsSelector)
     if (!targetNode) return
 
-    if (!anyTrackersAvailable(trackers)) {
+    if (!anyServicesAvailable(services)) {
       debugLog(
         debug,
-        `Auto event tracking requested, but no trackers available`
+        `Auto event analytics requested, but no services available`
       )
       return
     }
@@ -57,7 +57,7 @@ function enableAutoEventTracking({
       //
     }
 
-    trackEvent({ data, trackers, debug })
+    analyticizeEvent({ data, services, debug })
   }
 
   sourceNode.addEventListener(`click`, docClick)
@@ -65,44 +65,44 @@ function enableAutoEventTracking({
   return () => {
     sourceNode.removeEventListener(`click`, docClick)
 
-    debugLog(debug, `Auto event tracking disabled`)
+    debugLog(debug, `Auto event analytics disabled`)
   }
 }
 
-function trackEvent({ data, trackers = TRACKERS, debug = false }) {
-  if (!anyTrackersAvailable(trackers)) {
-    debugLog(debug, `Auto event tracking requested, but no trackers available`)
+function analyticizeEvent({ data, services = SERVICES, debug = false }) {
+  if (!anyServicesAvailable(services)) {
+    debugLog(debug, `Auto event analytics requested, but no services available`)
     return
   }
 
   if (!data || !data.name || !(data.props && isPlainObject(data.props))) {
     debugLog(
       debug,
-      `Auto event tracking requested, but not accomplished due to faulty data attribute value provided`
+      `Auto event analytics requested, but not accomplished due to faulty data attribute value provided`
     )
     return
   }
 
-  trackers.forEach((tracker) => {
-    switch (tracker) {
+  services.forEach((service) => {
+    switch (service) {
       case `plausible`: {
         if (window && window.plausible) {
           debugLog(
             debug,
-            `Plausible event tracking request has been fulfilled`,
+            `Plausible event analytics request has been fulfilled`,
             data
           )
 
           window.plausible(data.name, {
             props: data.props,
             callback: () => {
-              debugLog(debug, `Plausible event has been tracked`, data)
+              debugLog(debug, `Plausible event has been analyzed`, data)
             },
           })
         } else {
           debugLog(
             debug,
-            `Plausible event tracking requested, but tracker is not available`
+            `Plausible event analysation requested, but service is not available`
           )
         }
         break
@@ -111,9 +111,9 @@ function trackEvent({ data, trackers = TRACKERS, debug = false }) {
   })
 }
 
-function anyTrackersAvailable(trackers) {
-  return !!trackers.find((tracker) => {
-    switch (tracker) {
+function anyServicesAvailable(services) {
+  return !!services.find((service) => {
+    switch (service) {
       case `plausible`: {
         return !!window.plausible
       }
@@ -125,7 +125,7 @@ function anyTrackersAvailable(trackers) {
 
 function debugLog(debug, ...props) {
   if (!debug) return
-  console.log(`[oddcamp/tracker]`, ...props) // eslint-disable-line no-console
+  console.log(`[oddcamp/analytics]`, ...props) // eslint-disable-line no-console
 }
 
-export { enableAutoEventTracking, trackEvent }
+export { enableAutoEventAnalytics, analyticizeEvent }
