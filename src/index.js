@@ -8,7 +8,7 @@ function enableAutoEventAnalytics({
   targets = [`a`, `button`],
   services = SERVICES,
   debug = false,
-}) {
+} = {}) {
   if (!window || !document) {
     debugLog(
       debug,
@@ -69,7 +69,7 @@ function enableAutoEventAnalytics({
   }
 }
 
-function analyticizeEvent({ data, services = SERVICES, debug = false }) {
+function analyticizeEvent({ data, services = SERVICES, debug = false } = {}) {
   if (!anyServicesAvailable(services)) {
     debugLog(debug, `Auto event analytics requested, but no services available`)
     return
