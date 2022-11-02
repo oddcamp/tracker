@@ -46,6 +46,73 @@
       </button>
     </p>
 
+    <div class="auto-analytics-dynamic">
+      <template>
+        <p>
+          <button
+            type="button"
+            data-event-analytics='{
+              "name": "Click of an automatic event analytics",
+              "props": {
+                "trigger_type": "button"
+              }
+            }'
+          >
+            Analyticize dynamic button clicks
+          </button>
+        </p>
+      </template>
+    </div>
+
+    <form
+      method="post"
+      action="/"
+      class="auto-analytics-form"
+      data-event-analytics='{
+        "name": "Form submit of an automatic event analytics",
+        "options": {
+          "allFieldsAsProps": true
+        },
+        "props": {
+          "trigger_type": "form"
+        }
+      }'
+    >
+      <input type="checkbox" name="checkbox" value="yes" />
+
+      <input type="radio" name="radio" value="yes" checked />
+
+      <input type="radio" name="radio" value="no" />
+
+      <input
+        type="search"
+        name="search"
+        placeholder="Analyticize form submissions with all fields as props"
+        style="width: 100%; max-width: 30em"
+      />
+    </form>
+
+    <form
+      method="post"
+      action="/"
+      class="auto-analytics-form"
+      data-event-analytics='{"name": "Form submit of an automatic event analytics"}'
+    >
+      <input type="checkbox" name="checkbox" value="yes" />
+
+      <input type="radio" name="radio" value="yes" checked />
+
+      <input type="radio" name="radio" value="no" />
+
+      <input
+        type="search"
+        name="search"
+        placeholder="Analyticize form submissions with selected fields as props"
+        style="width: 100%; max-width: 30em"
+        data-event-analytics-field
+      />
+    </form>
+
     <p>
       <button type="button" class="disable-auto-analytics-button">
         Disable automatic event analytics

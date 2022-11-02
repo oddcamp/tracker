@@ -64,7 +64,6 @@ _Defaults:_
 enableAutoEventAnalytics({
   attributeName = `event-analytics`,
   sourceNode = document,
-  targets = [`a`, `button`],
   services = [`plausible`],
   debug = false,
 })
