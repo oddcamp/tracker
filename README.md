@@ -56,7 +56,7 @@ JSX
 
 ### `enableAutoEventAnalytics`
 
-Enabled automatic event analytics for element clicks and form submissions.
+Enable automatic event analytics for element clicks and form submissions.
 
 _Defaults:_
 
@@ -79,7 +79,7 @@ disableAutoEventAnalytics()
 
 The value of `attributeName` attribute must be a JSON, e.g.:
 
-```json
+```js
 {
   "name": "", // name; mandatory
   "props": {}, // custom properties
@@ -90,7 +90,7 @@ The value of `attributeName` attribute must be a JSON, e.g.:
 ```
 
 Get all form field name and value pairs as props using boolean `allFieldsAsProps`
-option or specify field(s) manualy by setting `data-event-analytics-field`
+option or specify field(s) manually by setting `data-event-analytics-field`
 attribute, e.g.
 
 ```html
@@ -99,7 +99,7 @@ attribute, e.g.
   </form>
 ```
 
-Note: the attribute name may differ if you used a custom value for
+Note: the attribute name may differ if you did set a custom value for
 `attributeName` parameter (`${attributeName}-field`).
 
 ### `analyticizeEvent`
