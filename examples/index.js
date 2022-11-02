@@ -20,3 +20,15 @@ document
       },
     })
   })
+
+document.querySelectorAll(`.auto-analytics-form`).forEach((n) =>
+  n.addEventListener(`submit`, (e) => {
+    e.preventDefault()
+  })
+)
+
+// eslint-disable-next-line prettier/prettier
+;(() => {
+  const el = document.querySelector(`.auto-analytics-dynamic`)
+  el.innerHTML = el.querySelector(`template`).innerHTML
+})()
