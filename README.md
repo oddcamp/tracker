@@ -5,6 +5,24 @@ A collection of analytics helper functions.
 ## Supported analytics services
 
 - Plausible
+- Ahoy
+
+### Plausible
+
+Make sure the API object is available at `window.plausible`. It usually is if the snippet was inserted via `<script>`.
+
+### Plausible
+
+Make sure the API object is available at `window.ahoy`. If you use it as NPM module you can expose the object like this:
+
+```js
+import ahoy from "ahoy.js"
+
+window.ahoy = ahoy
+```
+  
+
+###
 
 ## Usage
 
@@ -47,7 +65,8 @@ JSX
 ## Development
 
 1. Create `.env` and set variables of analytics services you prefer to test:
-    - `PLAUSIBLE_DOMAIN`
+    - `PLAUSIBLE_DOMAIN=something.site`
+    - `AHOY_SCRIPT_URL=https://unpkg.com/ahoy.js@0.4.0/dist/ahoy.js`
 2. `$ yarn install`
 3. `$ yarn dev`
 3. [localhost:1234](http://localhost:1234)
@@ -64,7 +83,7 @@ _Defaults:_
 enableAutoEventAnalytics({
   attributeName = `event-analytics`,
   sourceNode = document,
-  services = [`plausible`],
+  services = [`plausible`, `ahoy`],
   debug = false,
 })
 ```
@@ -111,7 +130,7 @@ _Defaults:_
 ```js
 analyticizeEvent({ 
   data, 
-  services = [`plausible`],
+  services = [`plausible`, `ahoy`],
   debug = false 
 })
 ```
