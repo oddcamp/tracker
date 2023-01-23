@@ -5,6 +5,10 @@
     <if condition="plausible_domain">
       <script defer data-domain="{{ plausible_domain }}" src="https://plausible.io/js/script.local.js"></script>
     </if>
+
+    <if condition="ahoy_script_url">
+      <script defer src="{{ ahoy_script_url }}"></script>
+    </if>
   </head>
 
   <body>

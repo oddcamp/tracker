@@ -1,6 +1,6 @@
 import { isPlainObject, get } from "lodash"
 
-const SERVICES = [`plausible`]
+const SERVICES = [`plausible`, `ahoy`]
 
 function enableAutoEventAnalytics({
   attributeName = `event-analytics`,
@@ -196,6 +196,22 @@ function analyticizeEvent({ data, services = SERVICES, debug = false } = {}) {
         }
         break
       }
+
+      case `ahoy`: {
+        if (window && window.ahoy) {
+          debugLog(debug, `Ahoy event analyzation has been requested`, data)
+
+          window.ahoy.track(data.name, { ...(data.props || {}) })
+
+          debugLog(debug, `Ahoy event has been analyzed`, data)
+        } else {
+          debugLog(
+            debug,
+            `Ahoy event analysation requested, but service is not available`
+          )
+        }
+        break
+      }
     }
   })
 }
@@ -205,6 +221,10 @@ function anyServicesAvailable(services) {
     switch (service) {
       case `plausible`: {
         return !!window.plausible
+      }
+
+      case `ahoy`: {
+        return !!window.ahoy
       }
     }
 
