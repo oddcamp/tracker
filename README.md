@@ -11,7 +11,7 @@ A collection of analytics helper functions.
 
 Make sure the API object is available at `window.plausible`. It usually is if the snippet was inserted via `<script>`.
 
-### Plausible
+### Ahoy
 
 Make sure the API object is available at `window.ahoy`. If you use it as NPM module you can expose the object like this:
 
